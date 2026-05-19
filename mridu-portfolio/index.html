@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>domdom's chibi garden</title>
+  <meta name="theme-color" content="#fff7ef" />
+  <link rel="icon" type="image/gif" href="assets/profile/ico_Gif.gif" />
+
+  <style>
+    :root {
+      --cream: #fff7ef;
+      --ink: #211a16;
+      --green: #6f9470;
+      --pink: #f7c7bf;
+      --yellow: #ffe2a8;
+      --blue: #06587c;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 12%, #ffd9d0 0 10%, transparent 11%),
+        radial-gradient(circle at 85% 18%, #d9ead3 0 12%, transparent 13%),
+        linear-gradient(180deg, var(--cream), #fff0df);
+      cursor: auto;
+      overflow-x: hidden;
+    }
+
+    a, button {
+      cursor: pointer;
+    }
+
+    nav {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      display: flex;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.72);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 12px 30px rgba(0,0,0,.08);
+    }
+
+    nav a {
+      padding: 10px 16px;
+      border-radius: 999px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      background: var(--ink);
+      color: white;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 120px 8vw;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: #dcefd6;
+      color: #395d38;
+      font-weight: 900;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(56px, 10vw, 132px);
+      line-height: .88;
+      letter-spacing: -6px;
+    }
+
+    h2 {
+      margin: 0 0 26px;
+      font-size: clamp(42px, 7vw, 88px);
+      line-height: .9;
+      letter-spacing: -4px;
+    }
+
+    p {
+      font-size: clamp(18px, 2vw, 23px);
+      line-height: 1.65;
+      max-width: 850px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    .btn {
+      padding: 15px 24px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 900;
+      transition: .25s ease;
+    }
+
+    .primary {
+      background: var(--ink);
+      color: white;
+    }
+
+    .secondary {
+      border: 2px solid var(--ink);
+      color: var(--ink);
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+    }
+
+    .hero-art {
+      min-height: 590px;
+      border-radius: 52px;
+      background: var(--blue);
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 35px 80px rgba(0,0,0,.18);
+    }
+
+    .hero-art::before {
+      content: "hiii...";
+      position: absolute;
+      left: 36px;
+      top: 45%;
+      color: white;
+      font-size: 44px;
+      font-family: cursive;
+      transform: rotate(-72deg);
+      opacity: .9;
+    }
+
+    .hero-art img {
+      width: min(78%, 430px);
+      animation: float 4s ease-in-out infinite;
+      filter: drop-shadow(0 20px 30px rgba(0,0,0,.18));
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .profile-stack {
+      position: relative;
+      max-width: 480px;
+    }
+
+    .profile-photo {
+      width: 100%;
+      border-radius: 44px;
+      box-shadow: 0 30px 70px rgba(0,0,0,.16);
+      transform: rotate(-2deg);
+    }
+
+    .floating-chibi {
+      position: absolute;
+      width: 150px;
+      left: -36px;
+      top: -42px;
+      animation: bob 3s ease-in-out infinite;
+      filter: drop-shadow(0 12px 20px rgba(0,0,0,.18));
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .card {
+      background: rgba(255,255,255,.7);
+      padding: 32px;
+      border-radius: 34px;
+      box-shadow: 0 16px 42px rgba(0,0,0,.08);
+      transition: .25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px) rotate(-1deg);
+      background: white;
+    }
+
+    .card h3 {
+      font-size: 27px;
+      margin: 0 0 12px;
+    }
+
+    .card p {
+      font-size: 17px;
+    }
+
+    .embed-box {
+      margin-top: 34px;
+      padding: 18px;
+      border-radius: 36px;
+      background: #111;
+      overflow: hidden;
+      box-shadow: 0 30px 70px rgba(0,0,0,.18);
+    }
+
+    .garden-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 42px;
+      align-items: start;
+    }
+
+    .insta-card {
+      padding: 14px;
+      border-radius: 34px;
+      background: white;
+      box-shadow: 0 18px 46px rgba(0,0,0,.1);
+      transition: .3s ease;
+      overflow: hidden;
+    }
+
+    .insta-card:hover {
+      transform: translateY(-8px) scale(1.015);
+      box-shadow: 0 30px 70px rgba(0,0,0,.16);
+    }
+
+    .instagram-media {
+      min-width: 100% !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin: 0 auto !important;
+    }
+
+    .contact {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      min-height: 80vh;
+    }
+
+    .contact-box {
+      width: 100%;
+      max-width: 1000px;
+      padding: 72px 42px;
+      border-radius: 54px;
+      background: #171310;
+      color: white;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .socials a {
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .socials a:hover {
+      background: white;
+      color: #171310;
+    }
+
+    .cat {
+      position: fixed;
+      right: 22px;
+      bottom: 16px;
+      width: 115px;
+      height: 88px;
+      z-index: 999;
+      pointer-events: none;
+      animation: catBounce 1.8s ease-in-out infinite;
+    }
+
+    .cat-body {
+      position: absolute;
+      bottom: 0;
+      right: 18px;
+      width: 72px;
+      height: 42px;
+      border-radius: 60px 60px 38px 38px;
+      background: #28211c;
+    }
+
+    .cat-head {
+      position: absolute;
+      bottom: 30px;
+      right: 50px;
+      width: 46px;
+      height: 44px;
+      border-radius: 50%;
+      background: #28211c;
+    }
+
+    .cat-head::before,
+    .cat-head::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      border-left: 11px solid transparent;
+      border-right: 11px solid transparent;
+      border-bottom: 18px solid #28211c;
+    }
+
+    .cat-head::before { left: 2px; transform: rotate(-18deg); }
+    .cat-head::after { right: 2px; transform: rotate(18deg); }
+
+    .cat-eye {
+      position: absolute;
+      top: 18px;
+      width: 6px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ffe08a;
+      animation: blink 4s infinite;
+    }
+
+    .cat-eye.left { left: 13px; }
+    .cat-eye.right { right: 13px; }
+
+    .cat-tail {
+      position: absolute;
+      right: 0;
+      bottom: 32px;
+      width: 44px;
+      height: 12px;
+      border-radius: 999px;
+      background: #28211c;
+      transform-origin: left center;
+      animation: tailWag .8s ease-in-out infinite alternate;
+    }
+
+    .cat-paw {
+      position: absolute;
+      bottom: -3px;
+      width: 13px;
+      height: 10px;
+      border-radius: 999px;
+      background: #1f1915;
+      animation: pawTap .6s ease-in-out infinite alternate;
+    }
+
+    .paw-one { right: 64px; }
+    .paw-two { right: 32px; animation-delay: .3s; }
+
+    @keyframes float {
+      50% { transform: translateY(-18px); }
+    }
+
+    @keyframes bob {
+      50% { transform: translateY(-12px) rotate(8deg); }
+    }
+
+    @keyframes catBounce {
+      50% { transform: translateY(-5px); }
+    }
+
+    @keyframes tailWag {
+      from { transform: rotate(18deg); }
+      to { transform: rotate(-12deg); }
+    }
+
+    @keyframes blink {
+      0%, 92%, 100% { transform: scaleY(1); }
+      95% { transform: scaleY(.08); }
+    }
+
+    @keyframes pawTap {
+      from { transform: translateY(0); }
+      to { transform: translateY(-3px); }
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        width: calc(100% - 24px);
+        overflow-x: auto;
+      }
+
+      .hero,
+      .about-grid,
+      .cards,
+      .garden-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 105px 24px;
+      }
+
+      h1 {
+        letter-spacing: -3px;
+      }
+
+      .hero-art {
+        min-height: 470px;
+      }
+
+      .floating-chibi {
+        width: 110px;
+        left: -12px;
+        top: -28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#garden">Garden</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="cat" aria-hidden="true">
+    <div class="cat-tail"></div>
+    <div class="cat-body"></div>
+    <div class="cat-head">
+      <span class="cat-eye left"></span>
+      <span class="cat-eye right"></span>
+    </div>
+    <div class="cat-paw paw-one"></div>
+    <div class="cat-paw paw-two"></div>
+  </div>
+
+  <section class="hero" id="home">
+    <div>
+      <div class="tag">Illustrator • Brand Designer • Digital Artist</div>
+      <h1>Hi,<br>I’m Mridu.</h1>
+      <p>
+        I make tiny characters, soft worlds, thoughtful brands,
+        and playful visual stories that feel warm, curious, and alive.
+      </p>
+
+      <div class="buttons">
+        <a class="btn primary" href="mailto:mridushreehoon@gmail.com">Work With Me</a>
+        <a class="btn secondary" href="https://www.behance.net/mridushree" target="_blank">See My Work</a>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <img src="assets/profile/chibi.jpg" alt="Mridu chibi illustration">
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="about-grid">
+      <div class="profile-stack">
+        <img class="profile-photo" src="assets/profile/profilephoto.jpg" alt="Mridu Shree portrait">
+        <img class="floating-chibi" src="assets/profile/chibi.jpg" alt="Floating chibi artwork">
+      </div>
+
+      <div>
+        <h2>A little<br>about me.</h2>
+        <p>
+          I’m a passionate artist by profession and by nature.
+          I love thoughtful design, sustainable living, and the quiet joy of growing
+          food in tiny spaces.
+        </p>
+        <p>
+          My work comes from empathy, softness, observation, and play.
+          I like creating visuals that feel personal, kind, and a little magical.
+        </p>
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Brand Design</h3>
+        <p>I create visual identities that feel human, memorable, and emotionally clear.</p>
+      </div>
+
+      <div class="card">
+        <h3>Illustration</h3>
+        <p>I draw characters, chibis, expressive moments, and whimsical digital artwork.</p>
+      </div>
+
+      <div class="card">
+        <h3>Graphic Design</h3>
+        <p>I design visuals for campaigns, social media, stories, and creative communication.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <h2>My work.</h2>
+    <p>
+      A glimpse into my branding, illustration, and visual design explorations.
+    </p>
+
+    <div class="embed-box">
+      <div class="iframely-embed">
+        <div class="iframely-responsive" style="height: 140px; padding-bottom: 0;">
+          <a href="https://www.behance.net/mridushree"
+             data-iframely-url="https://iframely.net/IJrYXKyf?theme=dark"></a>
+        </div>
+      </div>
+    </div>
+
+    <script async src="https://iframely.net/embed.js"></script>
+  </section>
+
+  <section id="garden">
+    <h2>domdom’s<br>chibi garden.</h2>
+    <p>
+      Tiny creatures, silly expressions, cozy moods, and the little visual worlds
+      I like to carry around with me.
+    </p>
+
+    <div class="garden-grid">
+      <div class="insta-card">
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DNQWuMMSxsW/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+      </div>
+
+      <div class="insta-card">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DCb2KbOSkI3/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+      </div>
+
+      <div class="insta-card">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C8rsR0eyqph/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+      </div>
+
+      <div class="insta-card">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C8eDM1qysSd/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+      </div>
+    </div>
+
+    <script async onerror="var a=document.createElement('script');a.src='https://iframely.net/files/instagram_embed.js';document.body.appendChild(a);" src="https://www.instagram.com/embed.js"></script>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact-box">
+      <h2>Let’s create something thoughtful together.</h2>
+      <p>
+        I’m open to illustration, brand identity, digital art,
+        and graphic design collaborations.
+      </p>
+
+      <div class="socials">
+        <a href="mailto:mridushreehoon@gmail.com">Email</a>
+        <a href="https://www.behance.net/mridushree" target="_blank">Behance</a>
+        <a href="https://www.instagram.com/shreedom1/" target="_blank">Instagram</a>
+        <a href="https://www.linkedin.com/in/mridu-shree-hoon/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
